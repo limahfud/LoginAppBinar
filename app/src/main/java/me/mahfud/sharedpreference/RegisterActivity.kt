@@ -23,6 +23,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        if (checkIsLoggedIn()) return
 
         btRegister.setOnClickListener {
             doRegister()
@@ -31,6 +32,17 @@ class RegisterActivity : AppCompatActivity() {
         tvLinkLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+    }
+
+    private fun checkIsLoggedIn(): Boolean {
+        val sharedPref = getSharedPreferences("file", Context.MODE_PRIVATE) ?: return false
+
+        if (sharedPref.getBoolean("isLoggedIn", false)) {
+            startActivity(Intent(this, MainActivity::class.java))
+            return true
+        }
+
+        return false
     }
 
     private fun doRegister() {
