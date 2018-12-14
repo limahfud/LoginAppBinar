@@ -1,5 +1,7 @@
 package me.mahfud.sharedpreference
 
+import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.BoringLayout
@@ -26,6 +28,9 @@ class RegisterActivity : AppCompatActivity() {
             doRegister()
         }
 
+        tvLinkLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
 
     private fun doRegister() {
@@ -39,6 +44,8 @@ class RegisterActivity : AppCompatActivity() {
 
         if (validateCompleted() && validatePassword()) {
             saveDataToSharedPref()
+
+            checkDataSaved()
         }
     }
 
@@ -72,7 +79,32 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun saveDataToSharedPref() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        val sharedPref = getSharedPreferences("file", Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putString("key-nama", name)
+            putString("key-lahir", lahir)
+            putString("key-umur", age)
+            putString("key-email", email)
+            putString("key-password", password)
+            putString("key-gender", gender)
+
+            apply()
+        }
+
+        Toast.makeText(this, "Selamat anda sudah ter-registrasi", Toast.LENGTH_LONG)
+                .show()
+    }
+
+    private fun checkDataSaved() {
+        val sharedPref = getSharedPreferences("file", Context.MODE_PRIVATE) ?: return
+
+        Log.d("CHECK-HASIL", sharedPref.getString("key-nama", "-"))
+        Log.d("CHECK-HASIL", sharedPref.getString("key-lahir", "-"))
+        Log.d("CHECK-HASIL", sharedPref.getString("key-umur", "-"))
+        Log.d("CHECK-HASIL", sharedPref.getString("key-email", "-"))
+        Log.d("CHECK-HASIL", sharedPref.getString("key-password", "-"))
+        Log.d("CHECK-HASIL", sharedPref.getString("key-gender", "-"))
     }
 
 
