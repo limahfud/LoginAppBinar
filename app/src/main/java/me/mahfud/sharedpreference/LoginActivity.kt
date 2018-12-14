@@ -1,6 +1,7 @@
 package me.mahfud.sharedpreference
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -38,7 +39,8 @@ class LoginActivity : AppCompatActivity() {
         Log.d("TEST-EMAIL", "Password from Preference : $passwordFromPref , Password Input: $password")
 
         if (emailFromPref == email && passwordFromPref == password) {
-            Toast.makeText(this, "Selamat anda berhasil login", Toast.LENGTH_SHORT).show()
+
+            startActivity(Intent(this, MainActivity::class.java))
         } else {
             Toast.makeText(this, "Maaf anda gagal login", Toast.LENGTH_SHORT).show()
 

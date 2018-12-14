@@ -99,7 +99,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun checkDataSaved() {
         val sharedPref = getSharedPreferences("file", Context.MODE_PRIVATE) ?: return
 
-        Log.d("CHECK-HASIL", sharedPref.getString("key-nama", "-"))
+        Log.d("CHECK-HASIL", sharedPref.getString(getString(R.string.key_shared_pref_name), "-"))
         Log.d("CHECK-HASIL", sharedPref.getString("key-lahir", "-"))
         Log.d("CHECK-HASIL", sharedPref.getString("key-umur", "-"))
         Log.d("CHECK-HASIL", sharedPref.getString("key-email", "-"))

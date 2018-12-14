@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SharedPreference</string>
+    <string name="key_shared_pref_name">key-nama</string>
 </resources>
